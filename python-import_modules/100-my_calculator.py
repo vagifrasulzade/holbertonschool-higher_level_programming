@@ -10,6 +10,7 @@ if __name__ == "__main__":
     a = int(sys.argv[1])
     operator = sys.argv[2]
     b = int(sys.argv[3])
+    print(sys.argv)
 
     if operator == "+":
         result = add(a, b)
