@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-from string import 
+import string
+print(string.ascii_uppercase())
