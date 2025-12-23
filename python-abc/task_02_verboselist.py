@@ -9,7 +9,7 @@ class VerboseList(list):
         count = len(iterable)
         super().extend(iterable)
         print(f"Extending the wlist with [{count}] items.")
-    
+
     def remove(self, value):
         super().remove(value)
         print(f"Removed [{value}] from the list.")
@@ -22,4 +22,3 @@ class VerboseList(list):
             value = super().pop(index)
             print(f"Popped [{value}] from the list.")
         return value
-        
