@@ -3,6 +3,5 @@
 
 
 class BaseGeometry:
-    """BaseGeometry class"""
-    def area(self):
-        pass
+    """Empty BaseGeometry class"""
+    pass
