@@ -2,37 +2,56 @@
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+
 users = {}
+
+
 @app.route("/")
 def home():
-    return "Welcome to the Flask API!"
+    return jsonify({"message": "Hello, this is a simple Flask API!"})
 
-@app.route("/data")
+
+@app.route("/data", methods=["GET"])
 def data():
-    user = list(users)
-    return jsonify(user)
+    return jsonify(list(users.keys()))
 
-@app.post("/add_user")
-def add():
-    data = request.json
-    user = {"username": data.get("username"), "name": data.get("name"), "age": data.get("age"), "city": data.get("city")}
 
-    if user["username"] is None:
-        return {"error":"Username is required"}, 400
-    users[data.get("username")] = user
-    return jsonify({'message': 'User added', 'user': user}), 201
-
-@app.route("/users/<username>")
-def user(username):
-    if username is None:
-        return jsonify({'error': 'Username is required'}), 400
-
-    if users.get(username) is None:
-        return {"error": "User not found"}, 404
-    return jsonify(users.get(username)), 200
-
-@app.route("/status")
+@app.route("/status", methods=["GET"])
 def status():
-    return "OK"
+    return "OK", 200
 
-app.run()
+
+@app.route("/users/<username>", methods=["GET"])
+def get_user(username):
+    if username not in users:
+        return jsonify({"error": "User not found"}), 404
+    return jsonify(users[username])
+
+
+@app.route("/add_user", methods=["POST"])
+def add_user():
+    try:
+        data = request.get_json()
+    except Exception:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    if data is None:
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    username = data.get("username")
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
+
+    if username in users:
+        return jsonify({"error": "Username already exists"}), 409
+
+    users[username] = data
+
+    return jsonify({
+        "message": "User added",
+        "user": data
+    }), 201
+
+
+if __name__ == "__main__":
+    app.run()
