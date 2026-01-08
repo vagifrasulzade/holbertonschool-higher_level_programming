@@ -8,7 +8,7 @@ users = {}
 
 @app.route("/")
 def home():
-    return jsonify({"message": "Welcome to the Flask API!"})
+    return "Welcome to the Flask API!"
 
 
 @app.route("/data", methods=["GET"])
