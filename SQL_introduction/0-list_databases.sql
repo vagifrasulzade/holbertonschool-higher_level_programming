@@ -1,2 +1,2 @@
 -- shwoing database command
-SHOW DATABASE;
+SHOW DATABASES;
