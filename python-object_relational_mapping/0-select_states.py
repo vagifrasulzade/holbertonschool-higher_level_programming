@@ -3,7 +3,6 @@
 import MySQLdb
 import sys
 
-
 def connection():
     usrnm = sys.argv[1]
     psswrd = sys.argv[2]
