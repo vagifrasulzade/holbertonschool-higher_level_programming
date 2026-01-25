@@ -1,36 +1,35 @@
 #!/usr/bin/python3
-"""
-Lists all states from the database hbtn_0e_0_usa.
+"""This script lists all states from the database hbtn_0e_0_usa"""
 
-"""
-import MySQLdb
 import sys
+import pymysql
+pymysql.install_as_MySQLdb()  # Windows-da MySQLdb əvəzinə PyMySQL istifadə
+import MySQLdb
 
-if __name__ == "__main__":
-    # Get arguments from command line
-    mysql_user = sys.argv[1]
-    mysql_password = sys.argv[2]
+
+def connection():
+    """Connects to the database and prints all states sorted by id."""
+    usrnm = sys.argv[1]
+    psswrd = sys.argv[2]
     db_name = sys.argv[3]
 
-    # Connect to the MySQL server
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=mysql_user,
-        passwd=mysql_password,
+        user=usrnm,
+        passwd=psswrd,
         db=db_name
     )
 
-    # Create a cursor object to execute queries
     cursor = db.cursor()
-
-    # Execute the SQL query
-    cursor.execute("SELECT * FROM states ORDER BY id ASC")
-
+    cursor.execute("SELECT * FROM states ORDER BY id ASC;")
     rows = cursor.fetchall()
-
     for row in rows:
         print(row)
 
     cursor.close()
     db.close()
+
+
+if __name__ == "__main__":
+    connection()
