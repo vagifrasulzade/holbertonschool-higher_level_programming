@@ -27,6 +27,7 @@ if __name__ == "__main__":
         "WHERE name = '{}' "
         "ORDER BY id ASC"
     ).format(state_name)
+    
 
     cursor.execute(query)
 
