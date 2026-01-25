@@ -1,40 +1,29 @@
 #!/usr/bin/python3
-"""first ORM"""
+"""
+First ORM
+"""
 
 import MySQLdb
 import sys
 
-
-
-
-def connection():
-    usrnm = sys.argv[1]
-    psswrd = sys.argv[2]
-    db_name = sys.argv[3]
+if __name__ == "__main__":
+    user = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
     db = MySQLdb.connect(
-         host='localhost',
-         port=3306,
-         user=usrnm,
-         password=psswrd,
-         database=db_name)
+        host="localhost",
+        port=3306,
+        user=user,
+        passwd=password,
+        db=database
+    )
 
     cursor = db.cursor()
+    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
 
-    sql = (
-        "SELECT * FROM states "
-        "WHERE BINARY name LIKE 'N%' "
-        "ORDER BY states.id ASC;")
-
-    cursor.execute(sql)
-
-    rows = cursor.fetchall()
-    for row in rows:
+    for row in cursor.fetchall():
         print(row)
 
     cursor.close()
     db.close()
-
-
-if __name__ == "__main__":
-    connection()
