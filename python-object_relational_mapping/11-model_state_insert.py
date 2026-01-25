@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-This script adds the State object "Louisiana" to the database hbtn_0e_6_usa
-and prints the new state's id
+First ORM
 """
 import sys
 from model_state import Base, State
