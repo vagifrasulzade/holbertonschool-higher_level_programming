@@ -1,33 +1,20 @@
 #!/usr/bin/python3
-"""This script lists all states from the database hbtn_0e_0_usa"""
+"""First ORM"""
+
 import MySQLdb
 import sys
 
-
-def connection():
-    usrnm = sys.argv[1]
-    psswrd = sys.argv[2]
-    db_name = sys.argv[3]
-
+if __name__ == "__main__":
     db = MySQLdb.connect(
-         host='localhost',
-         port=3306,
-         user=usrnm,
-         password=psswrd,
-         database=db_name)
+        host="localhost", user=sys.argv[1],
+        password=sys.argv[2], database=sys.argv[3], port=3306
+        )
 
-    cursor = db.cursor()
-
-    sql = "SELECT * FROM states ORDER BY states.id ASC;"
-    cursor.execute(sql)
-
-    rows = cursor.fetchall()
+    cs = db.cursor()
+    cs.execute("SELECT * FROM states ORDER BY id ASC")
+    rows = cs.fetchall()
     for row in rows:
         print(row)
 
-    cursor.close()
+    cs.close()
     db.close()
-
-
-if __name__ == "__main__":
-    connection()
