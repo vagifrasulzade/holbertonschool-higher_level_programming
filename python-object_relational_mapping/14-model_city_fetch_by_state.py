@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-This script lists all City objects from the database hbtn_0e_6_usa
-in ascending order by cities.id, along with their corresponding State name
+First ORM
 """
 import sys
 from model_city import City
@@ -11,7 +10,6 @@ from sqlalchemy.orm import sessionmaker
 
 
 if __name__ == "__main__":
-    # движок
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
         sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
 
